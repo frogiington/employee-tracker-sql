@@ -8,14 +8,15 @@ const script = require ('./Assets/script.js');
         {
             type: 'list',
             name: 'InitialQuestions',
-            message:'Choose an option.',
+            message:'Choose an Option',
             choices: ['View Departments', 'View Roles', 'View Employees', 'Add a Department'],
         }
     ])
     .then(answers => {
-        console.info('Answer:', answers.InitialQuestions);
+        console.info(answers.InitialQuestions);;
     })
-    script.viewDepartments();
+    var returnDepartments = await script.viewDepartments();
+    console.log (returnDepartments.rows)
  }
 
  initialQuestioning();

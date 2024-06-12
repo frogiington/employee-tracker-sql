@@ -21,6 +21,7 @@ app.listen(3000, () => {
 
 async function viewDepartments(){
     const result = await db.query('SELECT * FROM departments'); 
+    return result;
     }
    
 //Add Department
