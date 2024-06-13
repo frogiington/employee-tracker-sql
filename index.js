@@ -25,19 +25,19 @@ const script = require ('./Assets/script.js');
     switch(selection){
         case 'View Departments':
             var returnDepartments = await script.viewDepartmentsSQL();
-            console.log(returnDepartments.rows)
+            console.table(returnDepartments.rows)
         break;
 
         case 'View Roles':
             var returnRoles = await script.viewRolesSQL();
-            console.log(returnRoles.rows);
+            console.table(returnRoles.rows);
             await addRoleQuery();
         break;
 
 
         case 'View Employees':
             var returnEmployees = await script.viewEmployeesSQL();
-            console.log(returnEmployees.rows);
+            console.table(returnEmployees.rows);
             await employeeQuery();
         break;
 
