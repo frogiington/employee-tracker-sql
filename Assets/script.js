@@ -3,49 +3,50 @@ const db = require('../db.js');
 
 const app = express();
 
-app.get('/', async (req, res) => {
-  try {
-    const result = await db.query('SELECT * FROM users');
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
-
 //Choose View All Departments
 
-async function viewDepartments(){
+async function viewDepartmentsSQL(){
     const result = await db.query('SELECT * FROM departments'); 
     return result;
     }
    
 //Add Department
-async function addDepartments(newDepartment){
+async function addDepartmentsSQL(newDepartment){
     const result = await db.query(`INSERT INTO departments(department,id) VALUES (${newDepartment})`)
 }
 
 //Choose View Roles
 
-async function viewRoles(){
-  const result = await db.query('SELECT * FROM roles')
+async function viewRolesSQL(){
+  const result = await db.query('SELECT * FROM roles'); 
+  return result;
 }
 
+
 //Add Role
-async function addRoles(newRole){
+async function addRolesSQL(newRoles){
   const result = await db.query(`INSERT INTO roles(job_title,id,department,salary) VALUES (${newRoles})`)
+  console.log("Added new role to table")
 }
 
 // Choose View All Employees
 
-//Add Employee
+async function viewEmployeesSQL(){
+  const result = await db.query('SELECT * FROM employees');
+  return result;
+}
 
+//Add Employee
+async function addEmployeesSQL(newEmployee){
+  const result = await db.query(`INSERT INTO employees(employeeid,first_name,last_name,job_titles,department,salaries) VALUES (${newEmployee})`)
+  console.log("Added new employee to table")
+}
 //Update Employee Role
 
 //Exports
-exports.viewDepartments = viewDepartments;
-exports.addDepartments = addDepartments;
+exports.viewDepartmentsSQL = viewDepartmentsSQL;
+exports.addDepartmentsSQL = addDepartmentsSQL;
+exports.viewRolesSQL = viewRolesSQL;
+exports.addRolesSQL = addRolesSQL;
+exports.viewEmployeesSQL = viewEmployeesSQL;
+exports.addEmployeesSQL = addEmployeesSQL;
