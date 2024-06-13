@@ -41,16 +41,15 @@ const script = require ('./Assets/script.js');
             await employeeQuery();
         break;
 
-        case 'Add New Department':
-            var newDepartment = await addDepartments();
-            console.log(newDepartment)
+        case 'Add a Department':
+         addDepartmentsQuery();
         break;
     }
 }
 
 
     //Add Department
-async function addDepartments(){
+async function addDepartmentsQuery(){
      await inquirer.prompt([
          {
                 name: 'newDepartment',
@@ -59,9 +58,10 @@ async function addDepartments(){
      ])
         .then(answers =>{
              var newDepartment = answers.newDepartment;
+             console.log(newDepartment);
+             script.addDepartmentsSQL(newDepartment);
          })
     
-    addDepartmentsSQL();
 }
 //Add Role Query
 async function addRoleQuery(){
@@ -131,7 +131,7 @@ async function addEmployee(){
     await inquirer.prompt([
         {
             name: 'newEmployee',
-            message: 'Add New Employee (employeeid,\'first_name\',\'last_name\',\'job_title\',\'department\',salary)'
+            message: 'Add New Employee (employeeid,\'first_name\',\'last_name\',\'job_title\',\'department\',salary,\'manager\')'
         }
     ])
     .then(answers => {
@@ -141,3 +141,22 @@ async function addEmployee(){
     })
 }
 //Update Employee Role
+
+async function updateEmployee(){
+    await inquirer.prompt([
+        {
+            name: 'employeeID',
+            message: 'Input ID of Employee. (Numerical Value)'
+        },
+        {
+            name: 'employeeRole',
+            message: 'Input new role for Employee.(\'Job_Title\')'
+        }
+    ])
+    .then(answers => {
+        var role = answers.employeeRole;
+        var id = answers.employeeID;
+        script.updateEmployeesSQL(role,id);
+    })
+    initialQuestioning();
+}
